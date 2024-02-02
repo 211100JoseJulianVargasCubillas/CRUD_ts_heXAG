@@ -93,7 +93,8 @@ export class MySqlUSerRepository implements UserRepository{
     }
     async deleteUser(uuid: string): Promise<string | null> {
         try {
-            const sql = 'DELETE FROM users WHERE uuid = ?';
+            const sql = "UPDATE users SET deleted_at = ?";
+            //const sql = 'DELETE FROM users WHERE uuid = ?';
             const result: any = await query(sql, [uuid]);
             if (result[0].affectedRows === 0){
                 return null;
